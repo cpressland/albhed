@@ -1,11 +1,11 @@
-import sys
+class AlBhed:
+    def __init__(self, text: str) -> None:
+        self.cha_english = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        self.cha_albhed = "ypltavkrezgmshubxncdijfqowYPLTAVKREZGMSHUBXNCDIJFQOW"
+        self.text = text
 
+    def translate(self) -> str:
+        return self.text.translate(str.maketrans(self.cha_english, self.cha_albhed))
 
-def albhed(text: str) -> str:
-    cha_english = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-    cha_albhed = "ypltavkrezgmshubxncdijfqowYPLTAVKREZGMSHUBXNCDIJFQOW"
-    return text.translate(str.maketrans(cha_english, cha_albhed))
-
-
-def cli() -> str:
-    print(albhed(" ".join(sys.argv[1:])))
+    def revert(self) -> str:
+        return self.text.translate(str.maketrans(self.cha_albhed, self.cha_english))
