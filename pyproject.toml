@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "albhed"
-version = "1.0.1"
+version = "0.0.0"
 description = "Converts ASCII into Al Bhed"
 authors = ["Chris Pressland <mail@cpressland.io>"]
 readme = "README.md"
