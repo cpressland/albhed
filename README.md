@@ -4,14 +4,12 @@ Simple CLI and Library that translates Text into Al Bhed
 
 Python:
 ```python
->>> from albhed import AlBhed
+>>> from albhed import albhed
 >>>
->>> albhed = AlBhed("Hello, World!")
->>> albhed.translate()
+>>> albhed("Hello, World!")
 'Rammu, Funmt!'
 >>>
->>> albhed = AlBhed("Rammu, Funmt!")
->>> albhed.revert()
+>>> albhed("Rammu, Funmt!", revert=True)
 'Hello, World!'
 ```
 

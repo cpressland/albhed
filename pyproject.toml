@@ -1,38 +1,20 @@
-[tool.poetry]
+[project]
 name = "albhed"
 version = "0.0.0"
-description = "Converts Text into Al Bhed"
-authors = ["Chris Pressland <mail@cpressland.io>"]
+description = "Converts English text to Albhed, a fictional language from the Final Fantasy series."
 readme = "README.md"
+requires-python = ">=3.13"
+dependencies = ["typer>=0.16.1"]
 
-[tool.poetry.scripts]
-albhed = "albhed.cli:cli"
+[dependency-groups]
+dev = ["ruff>=0.12.10"]
 
-[tool.poetry.dependencies]
-python = "^3.11"
-click = "^8.1.3"
+[tool.uv]
+package = true
 
+[project.scripts]
+albhed = "albhed:app"
 
-[tool.poetry.group.dev.dependencies]
-ruff = "^0.12.0"
-black = ">=25.1,<25.2"
-isort = "^6.0.0"
-
-
-[tool.black]
-line-length = 88
-force-exclude = 'original_code/*'
-
-[tool.isort]
-line_length = 88
-profile = "black"
-
-[tool.ruff]
-line-length = 88
-
-[tool.poetry-dynamic-versioning]
-enable = true
-
-[build-system]
-requires = ["poetry-core>=1.0.0", "poetry-dynamic-versioning"]
-build-backend = "poetry_dynamic_versioning.backend"
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = ["D203", "D213", "FBT002"]

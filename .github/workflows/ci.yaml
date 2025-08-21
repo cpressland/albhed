@@ -1,42 +1,19 @@
-name: ci
+name: pypi
 
 on:
   push:
     tags: ['v[0-9]+.[0-9]+.[0-9]+']
-  pull_request:
-    branches: [master]
 
 jobs:
-  test:
-    name: test
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v5
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.13'
-      - run: pip install ruff isort black
-      - run: ruff check .
-      - run: black --check .
-      - run: isort --check .
-
   publish:
-    if: github.event_name == 'push'
     name: publish
-    needs: [test]
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
     steps:
       - uses: actions/checkout@v5
-        with:
-          fetch-depth: 0
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.13'
-      - run: |
-          pip install poetry
-          poetry self add "poetry-dynamic-versioning[plugin]"
-          poetry config pypi-token.pypi ${{ secrets.PYPI_TOKEN }}
-      - run: |
-          poetry build
-      - run: |
-          poetry publish
+      - uses: astral-sh/setup-uv@v6
+      - run: uvx ruff check .
+      - run: uv version ${{ github.ref_name }}
+      - run: uv build
+      - run: uv publish --trusted-publishing always
